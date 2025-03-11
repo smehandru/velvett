@@ -45,7 +45,13 @@ async function sendMessage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ session_id: session_id, response: userInput })
             });
+        
+            if (!response.ok) {
+                throw new Error(`HTTP Error: ${response.status}`);
+            }
+        
             let data = await response.json();
+        
 
             // Remove typing indicator
             chatBox.removeChild(typingIndicator);
